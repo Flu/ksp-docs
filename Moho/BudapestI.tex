@@ -1,0 +1,159 @@
+\documentclass[11pt, a4paper]{article}
+
+% --- Packages ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{siunitx}
+\geometry{margin=2.5cm, headheight=26pt}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{lastpage}
+
+% --- ESA Official Colors (Approximate) ---
+\definecolor{esablue}{RGB}{0, 50, 160}
+
+% --- Mission Metadata ---
+\newcommand{\missionname}{Budapest I}
+\newcommand{\missiontype}{Mission objectives}
+\newcommand{\commander}{Adrian Fluturel}
+\newcommand{\launchdate}{Year 2, Day 25}
+
+% --- Header and Footer Setup ---
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\includegraphics[height=1cm]{../assets/esa_logo.png}}
+\chead{\textbf{\missionname} \\ \small ESA Mission Report}
+\rhead{\missiontype}
+\lfoot{Author: \commander}
+\rfoot{Page \thepage\ of \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% --- Title Section Formatting ---
+\titleformat{\section}{\large\bfseries\color{esablue}}{}{0em}{}[\titlerule]
+
+\begin{document}
+
+% --- Front Page ---
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    \includegraphics[width=0.4\textwidth]{../assets/esa_logo.png}\\[2cm]
+    {\Huge \textbf{MISSION REPORT}}\\[0.5cm]
+    {\LARGE \missionname}\\[1.5cm]
+    
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{ll}
+            \textbf{Status:} & ONGOING \\
+            \textbf{Launch Date:} & \launchdate \\
+            \textbf{Operator:} & ESA \\
+            \textbf{Target:} & Moho \\
+        \end{tabular}
+    \end{table}
+
+    \vfill
+    \begin{center}
+        \textit{This document contains technical specifications and  flight data for the \missionname\ mission as part of the Kerbin Expansion Initiative.}
+    \end{center}
+    \vfill
+    
+    {\large \today}
+\end{titlepage}
+
+\newpage
+
+\section{1. Mission objectives}
+The primary goal of the mission was confirming the theories about a
+Hohmann transfer to Moho in a reasonable time with the $\Delta$v budget
+of an Ariane 7 UH booster. Moho is well known for being hard to get
+to, especially because of its insertion burn. As such, \missionname\
+was tasked with finding out if it's possible to use the Ariane 7 UH to
+make a one-way trip to Moho from Kerbin in an optimal launch window. As a
+reminder, a launch window between Kerbin and Moho opens when the phase
+angle is about \ang{110} (i.e. Moho is \ang{110} ahead of Kerbin).
+
+A secondary mission objective was testing the capabilities of the crew
+to transport and assemble a rover made for low-gravity in-situ. That
+is, the individual pieces of the rover would be stowed away in a
+storage container and assembled on-site by an engineer and
+subsequently used for excursions further away from the landing site if
+needed. Testing such a rover and certifying it would be very useful
+for future missions to Dres and Duna, even though they have higher
+gravity than Moho.
+
+Although the primary goal is to test the one-way capabilities of the
+booster, a subsequent mission is to be organized to get the Kerbals
+back to Kerbin.
+
+To summarize:
+\begin{itemize}
+\item Certify that the Ariane 7 UH booster has enough $\Delta$v for a
+  one-way trip with a lander attached.
+\item Verify that the it is possible to travel and land to Moho in the
+  established launch window with a Hohmann transfer.
+\item If the upper cryogenic stage has any fuel left after the
+  insertion burn, keep it in orbit for later rendez-vous with the lander.
+\item Certify the rover can be built and that it works well in
+  low-gravity situations.
+\end{itemize}
+
+More details about the rover can be found in the document detailing
+its performance, although a short version can also be found here.
+
+\section{2. Kerbonauts}
+Talk about the kerbonauts, if it is a manned mission. If it is not,
+skip this section.
+
+\section{3. Vehicle specifications}
+Describe the hardware for this mission. Here you can get the data for
+the specific craft used and describe any custom modifications for this
+mission, if any.
+
+\begin{table}[h]
+    \centering
+    \caption{Hardware Configuration: Vanguard-1 Lander}
+    \vspace{2mm}
+    \begin{tabular}{@{}lll@{}}
+        \toprule
+        \textbf{Component} & \textbf{Mass (t)} & \textbf{Primary Engine} \\ \midrule
+        Command Module      & 0.8               & N/A                     \\
+        Descent Stage       & 4.2               & LV-909 "Terrier"        \\
+        Service Module      & 2.5               & Poodle Mk2              \\
+        Booster Stage       & 35.0              & S1 SRB-KD25k            \\ \bottomrule
+    \end{tabular}
+\end{table}
+
+\section{4. $\Delta$v budget}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|c|c|c|}
+    \hline
+    \textbf{Phase} & \textbf{Required $\Delta$v} & \textbf{Actual $\Delta$v} & \textbf{Efficiency} \\ \hline
+    Kerbin Ascent  & 3400 m/s                    & 3550 m/s                 & 95.7\%              \\ \hline
+    Munar Transfer & 850 m/s                     & 845 m/s                  & 100.6\%             \\ \hline
+    Landing        & 600 m/s                     & 720 m/s                  & 83.3\%              \\ \hline
+    \end{tabular}
+\end{table}
+
+\section{4. Post-mission analysis}
+Talk about the conclusion of the mission, describe what the failures
+were, what we can learn from this, this would also be the place to
+write a report about incidents or kerbal-error.
+
+\newpage
+\section{Appendix: Mission Imagery}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{../assets/Moho/Budapest-I-arrival.png}
+    \caption{From left to right: the ESA flag, Dezer Kerman, the
+      Columbus rover and the DEL lander in Dezer Crater, shortly after
+      landing.}
+\end{figure}
+
+\end{document}

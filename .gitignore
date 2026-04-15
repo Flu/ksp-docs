@@ -1,0 +1,44 @@
+## --- LaTeX Core Auxiliary Files ---
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.pdfsync
+
+## --- Bibliography and Indexing ---
+*.bbl
+*.blg
+*.idx
+*.ind
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+
+## --- Package-Specific Files ---
+# hyperref
+*.brf
+# minted / listings
+_minted*
+*.pyg
+# tikz/pgfplots
+*.table
+*.gnuplot
+
+## --- OS/Editor Specific ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.bak
+
+## --- KSP Specific (Optional) ---
+# If you decide to store craft files but don't want the 
+# auto-generated thumbnails or meta logs:
+*.loadmeta
+*.log

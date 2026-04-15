@@ -1,0 +1,128 @@
+\documentclass[11pt, a4paper]{article}
+
+% --- Packages ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{margin=2.5cm, headheight=26pt}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{lastpage}
+
+% --- ESA Official Colors (Approximate) ---
+\definecolor{esablue}{RGB}{0, 50, 160}
+
+% --- Mission Metadata ---
+\newcommand{\missionname}{Project X}
+\newcommand{\missiontype}{Mission objectives}
+\newcommand{\commander}{Adrian Fluturel}
+\newcommand{\launchdate}{Year 2, Day 25}
+
+% --- Header and Footer Setup ---
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\includegraphics[height=1cm]{../assets/esa_logo.png}}
+\chead{\textbf{\missionname} \\ \small ESA Mission Report}
+\rhead{\missiontype}
+\lfoot{Author: \commander}
+\rfoot{Page \thepage\ of \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% --- Title Section Formatting ---
+\titleformat{\section}{\large\bfseries\color{esablue}}{}{0em}{}[\titlerule]
+
+\begin{document}
+
+% --- Front Page ---
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    \includegraphics[width=0.4\textwidth]{../assets/esa_logo.png}\\[2cm]
+    {\Huge \textbf{MISSION REPORT}}\\[0.5cm]
+    {\LARGE \missionname}\\[1.5cm]
+    
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{ll}
+            \textbf{Status:} & mission status: ONGOING, SUCCESS, FAILURE> \\
+            \textbf{Launch Date:} & \launchdate \\
+            \textbf{Operator:} & ESA \\
+            \textbf{Target:} & Kerbin \\
+        \end{tabular}
+    \end{table}
+
+    \vfill
+    \begin{center}
+        \textit{This document contains technical specifications and flight data for the \missionname\ mission as part of the Kerbin Expansion Initiative.}
+    \end{center}
+    \vfill
+    
+    {\large \today}
+\end{titlepage}
+
+\newpage
+
+\section{1. Mission objectives}
+State the primary and secondary goals of the mission/expedition, and
+all optional targets or mission parameters.
+\begin{itemize}
+\item Launch the "Vanguard-1" Heavy Lifter.
+\item Establish a 15km x 15km Munar orbit.
+\item Collect surface samples from the \textit{East Crater}.
+\item Safe return and splashdown on Kerbin.
+\end{itemize}
+
+\section{2. Kerbonauts}
+Talk about the kerbonauts, if it is a manned mission. If it is not,
+skip this section.
+
+\section{3. Vehicle specifications}
+Describe the hardware for this mission. Here you can get the data for
+the specific craft used and describe any custom modifications for this
+mission, if any.
+
+\begin{table}[h]
+    \centering
+    \caption{Hardware Configuration: Vanguard-1 Lander}
+    \vspace{2mm}
+    \begin{tabular}{@{}lll@{}}
+        \toprule
+        \textbf{Component} & \textbf{Mass (t)} & \textbf{Primary Engine} \\ \midrule
+        Command Module      & 0.8               & N/A                     \\
+        Descent Stage       & 4.2               & LV-909 "Terrier"        \\
+        Service Module      & 2.5               & Poodle Mk2              \\
+        Booster Stage       & 35.0              & S1 SRB-KD25k            \\ \bottomrule
+    \end{tabular}
+\end{table}
+
+\section{4. $\Delta$v budget}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|l|c|c|c|}
+    \hline
+    \textbf{Phase} & \textbf{Required $\Delta$v} & \textbf{Actual $\Delta$v} & \textbf{Efficiency} \\ \hline
+    Kerbin Ascent  & 3400 m/s                    & 3550 m/s                 & 95.7\%              \\ \hline
+    Munar Transfer & 850 m/s                     & 845 m/s                  & 100.6\%             \\ \hline
+    Landing        & 600 m/s                     & 720 m/s                  & 83.3\%              \\ \hline
+    \end{tabular}
+\end{table}
+
+\section{4. Post-mission analysis}
+Talk about the conclusion of the mission, describe what the failures
+were, what we can learn from this, this would also be the place to
+write a report about incidents or kerbal-error.
+
+\newpage
+\section{Appendix: Mission Imagery}
+\begin{figure}[h]
+    \centering
+    % \includegraphics[width=0.8\textwidth]{screenshot_launch.png}
+    \caption{Vanguard-1 clearing the VAB tower at T+0:02.}
+\end{figure}
+
+\end{document}
