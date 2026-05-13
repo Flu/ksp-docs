@@ -296,6 +296,10 @@ off in the atmosphere instead of being left in a stable orbit. The
 remaining 100 m/s for circularization can be achieved with the
 cryogenic upper stage.
 
+Assuming optimal gravity, drag, and steering losses, total
+$\Delta v_{ascent}$ should be about \qty{3250}{\metre/\second}, but we should
+assume \qty{3800}{\metre/\second} in the worst-case scenario.
+
 \subsection{Apoapsis raise}
 
 This is a fuel-saving technique and can therefore be omitted for the
@@ -311,16 +315,16 @@ of exactly 1 Kerbin sidereal day: 5h 59m 9.425s or 21549.425s.
 The periapsis will necessarily remain at 75km. The apoapsis is
 therefore found by calculating the semi-major axis of the target
 orbit:
-\[ T = 2pi \cdot \sqrt{\frac{a^3}{\mu}} \]
-\[ a = \sqrt[3]{\frac{\mu \cdot T^2}{4\pi^2}} = \sqrt[3]{3.5316 \cdot 10^{12} \cdot \frac{21549.425^2}{4\pi^2}}\]
+\[ T_1 = 2pi \cdot \sqrt{\frac{a_1^3}{\mu}} \]
+\[ a_1 = \sqrt[3]{\frac{\mu \cdot T_1^2}{4\pi^2}} = \sqrt[3]{3.5316 \cdot 10^{12} \cdot \frac{21549.425^2}{4\pi^2}}\]
 \[ a = \qty{3463334}{\metre}\]
 
 Therefore, with a periapsis of 75 km, this results in an apoapsis of:
-\[ r_a = 2a - r_p = \qty{6251.668}{\km} \]
-\[ ap = r_{kerbin} - r_a = \qty{5651.668}{\km} \]
+\[ r_{a,1} = 2a_1 - r_{p,1} = \qty{6251.668}{\km} \]
+\[ ap_1 = r_{kerbin} - r_{a,1} = \qty{5651.668}{\km} \]
 
 At periapsis, at this new target orbit, the speed should be:
-\[ v_{periapsis} = \qty{3073.15}{\metre/\second}\]
+\[ v_{periapsis,1} = \qty{3073.15}{\metre/\second}\]
 
 Subtracting the previous value of \qty{2287}{\metre/\second},
 this results in a prograde burn of \qty{786}{\metre/\second} to raise
@@ -332,8 +336,105 @@ two-burn maneuver that will result in the TLI, we need to make sure
 that the Mun will be at the correct place when we perform our TLI
 exactly one sidereal day from now.
 
-That is, we need to calculate the phase angle between the ship and the
-Mun knowing that in one sidereal day plus half of the orbital period
-after the TLI burn, the phase angle will be a certain value. The exact
-value will depend on how close we want to intersect the Mun.
+\subsection{Trans-lunar injection (TLI)}
+
+Let the period of the first orbit be $T_1 = \qty{21549}{\second}$ and
+the period of the second orbit be $T_2$ with a semi-major axis $a_2$,
+a periapsis of \qty{75}{\km} and an apoapsis of $ap_2$. The radius of
+the apoapsis will then be $r_{ap,2}=r_{kerbin}+ap_2$. A good starting
+value for this radius would be the distance between the centre of mass
+of Kerbin and the Mun plus the sphere of influence of the Mun. So:
+
+\[ r_{pe,2} = r_{kerbin} + \qty{75}{\km} = \qty{675}{\km} \]
+\[ r_{ap,2} = r_{kerbin} + d_{kerbin,mun} + r_{SOI,mun} = 600 \cdot
+  10^3 + 12000 \cdot 10^3 + 2429.559 \cdot 10^3 =
+  \qty{15029000}{\metre} \]
+
+\[ a_2 = \qty{7852279.5}{\metre} \]
+
+\[ T_2 = 2\pi\sqrt{\frac{a^3}{\mu}} = \qty{73568}{\second}\]
+
+To achieve this orbit from the previous T1 orbit, vis-viva gives us a
+speed of:
+
+\[ v_{periapsis,2} = \sqrt{\mu (\frac{2}{r_{pe,2}} - \frac{1}{a_2}
+    )} = \qty{3164.52}{\metre/\second} \]
+
+Resulting in a prograde burn of $\qty{91.34}{\metre/\second}$.
+
+Calculating the approximate phase angle between the burn the Mun will
+require finding out where the Mun was $T_1 + T_2/2$ seconds before our
+encounter. Luckily, the Mun has a perfectly circular orbit, so there's
+no need converting back and forth from time to mean anomaly, since at
+an eccentricity of 0, true anomaly is equal to mean anomaly. However,
+in order to compare the angles of the ship and the Mun, both must be
+converted to true latitudes. Luckily, this is a simple addition.
+
+For a circular orbit, the angular velocity (in radians per second) of
+the Mun is given by:
+\[ \omega_{mun} = \frac{2\pi}{T_{mun}} = \qty{4.520784e-5}{\radian/\second}\]
+
+But
+
+\[ T_{total} = T_1 + T_2/2 = 21549 + 73568/2 = \qty{58333}{\second} \]
+
+Taking the angular velocity formula and rearranging to find the angle
+the Mun makes after a certain $\Delta t$:
+
+\[ \theta = \omega_{mun} \cdot \Delta t = \qty{2.6371}{\radian} =
+  \ang{151.09} \]
+
+Therefore $\theta - \ang{180}$ is the phase angle at which the vessel needs to do
+the first burn (the burn responsible for the T1 orbit) such that after
+the TLI, the new apoapsis will coincide with the exact location of the
+Mun. In reality, this is a rough approximation, as the ship needs to
+encounter the Mun on the leading side of its orbit around Kerbin, so
+subtracting around \ang{10} from this value would place the ship in
+the approximate correct location for a free-return trajectory. The
+exact angles needed would require studying the impact parameter, the
+flight path angle and doing a state vector simulation to be exact.
+
+This angle is not the difference between the true anomalies of the two
+objects. True anomalies are calculated based on the location of the
+periapsis (the argument of periapsis or $\omega$) and the latitude of
+the asecengind node (LAN or $\Omega$). As such, after getting reading
+for all these values, calculating the true longitude for each is
+trivial:
+
+\[ L_{ship} = \Omega_{ship} + \omega_{ship} + \nu_{ship} \]
+\[ L_{mun} = \Omega_{mun} + \omega_{mun} + \nu_{mun} \]
+
+When the value of $L_{ship}$ is $\theta - \ang{180}$ behind the Mun is
+the correct place to do the first burn.
+
+One needs to take care that the value wraps from \ang{360} to
+\ang{0} during the calculations for the ship's true longitude, since
+it takes more than one orbit for the ship to complete the $T_1$ and
+half of the $T_2$ orbit to get to the Mun.
+
+Subtle corrections can be made from this orbit to get a free-return
+trajectory that puts the ship's periapsis around Kerbin after the Mun
+encounter into the atmosphere at about 20--30 km.
+
+\subsection{Free-return}
+
+This phase of the flight is from the completion of the TLI burn until
+the encounter with Kerbin's atmosphere, approximately 2 days after the
+TLI. At the beginning of this phase is also when the separation of the
+upper stage and the docking maneuver is supposed to be tested. The
+upper stage can then be maneuevered remotely to place it on an impact
+trajectory to the Mun.
+
+Subtle corrections may be needed in this phase to correct for the
+inclination or for slight errors during the docking sequence of the
+LEM and LCM. Although we started with the assumption that the $T_0$ orbit
+around Kerbin is equatorial and every subsequent burn was purely
+prograde, that may not be true. Although this doesn't change the
+calculations in the previous steps at all, for orbital hygiene
+purposes, inclination corrections may be done as long as one remembers
+to correct for the prograde-retrograde speed side-effects of such
+maneuevers.
+
+\section{}
+
 \end{document}
