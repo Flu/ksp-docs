@@ -397,7 +397,7 @@ flight path angle and doing a state vector simulation to be exact.
 This angle is not the difference between the true anomalies of the two
 objects. True anomalies are calculated based on the location of the
 periapsis (the argument of periapsis or $\omega$) and the latitude of
-the asecengind node (LAN or $\Omega$). As such, after getting reading
+the ascending node (LAN or $\Omega$). As such, after getting reading
 for all these values, calculating the true longitude for each is
 trivial:
 
@@ -435,6 +435,65 @@ purposes, inclination corrections may be done as long as one remembers
 to correct for the prograde-retrograde speed side-effects of such
 maneuevers.
 
-\section{}
+\section{Launch windows}
+
+There are 3 conditions for the launch:
+\begin{itemize}
+\item The launch should be during the day at the KSC launchpad. This
+  puts the possible launch times everyday between 4:13 (sunrise) until
+  1:10 the next day (sunset). There is a strong preferance for the
+  morning since the rocket will launch due east and that way it will
+  still be in the sun's light until it achieves orbit.
+\item At least some part of the time of flight between Kerbin and the
+  Mun during TLI will need to be illuminated. This happens in any
+  possible configuration, since there is no realistic TLI burn that
+  will keep the ship eclipsed by either Kerbin or the Mun. This
+  condition enables the docking and maneuvering tests to be done in
+  the light.
+\item The perilune should happen at a time such that the far side of
+  the Mun is completely illuminated. This requires a solar
+  eclipse from the perspective of Kerbin. Technically, it's a new
+  moon, but since both Kerbin and the Mun have an ecliptical
+  inclination of exactly 0, they are the same thing.
+\end{itemize}
+
+To calculate possible launch times, we need to take into account the
+duration of every stage of the trajectory, get a time estimate for
+when a lunar eclipse will happen anywhere on Kerbin starting on Year
+2, day 167 and then extrapolate possible launch times and splashdown
+times.
+
+Eclipses happen regularly on Kerbin, at a frequency of about 7
+days. Not taking into account whether they are visible from the KSC,
+the following eclipses are proposed as targets for the perilune time:
+
+\begin{enumerate}
+\item Year 2, day 174, 1:07:36
+\item Year 2, day 180, 4:19:32
+\item Year 2, day 187, 1:31:27
+\item Year 2, day 193, 4:43:23
+\item Year 2, day 200, 1:55:18
+\item Year 2, day 206, 5:07:13
+\item Year 2, day 213, 2:19:09
+\item Year 2, day 219, 5:31:04
+\item Year 2, day 226, 2:43:00
+\item Year 2, day 232, 5:54:55
+\item Year 2, day 239, 3:06:50
+\item Year 2, day 246, 0:18:46
+\end{enumerate}
+
+And these are the known approximate times for the known phases of the
+mission:
+\begin{itemize}
+\item{From mark to stable orbit} --- 680 seconds
+\item{Coast time before apogee raise} --- depends on the phase angle
+  between the Mun and the rocket
+\item{Coast time before TLI maneuver} $\approx$ 1 sidereal day or
+  21549 seconds
+\item{From TLI to perilune} $\approx$ 5 hours and 20 minutes or 19080
+  seconds
+\item{From perilune to splashdown} $\approx$ 5 hours and 30 minutes or
+  19800 seconds
+\end{itemize}
 
 \end{document}
